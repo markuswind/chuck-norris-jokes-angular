@@ -1,1 +1,15 @@
 <h2>Jokes List</h2>
+
+<ul>
+  <li *ngFor="let joke of jokes">
+    {{ joke.joke }}
+
+    <div *ngIf="joke.categories.length > 0">
+      <ul>
+        <li *ngFor="let category of joke.categories">
+          {{ category }}
+        </li>
+      </ul>
+    </div>
+  </li>
+</ul>
