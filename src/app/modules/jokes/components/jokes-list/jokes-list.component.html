@@ -1,7 +1,9 @@
 <h2>Jokes List</h2>
 
+<h3>Random Jokes</h3>
+
 <ul>
-  <li *ngFor="let joke of jokes">
+  <li *ngFor="let joke of randomJokes$ | async">
     {{ joke.joke }}
 
     <div *ngIf="joke.categories.length > 0">

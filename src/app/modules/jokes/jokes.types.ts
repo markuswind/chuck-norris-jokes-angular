@@ -3,3 +3,7 @@ export interface Joke {
   joke: string;
   categories: string[];
 }
+
+export interface FeatureState {
+  randomJokes: Joke[];
+}

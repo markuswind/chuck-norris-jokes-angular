@@ -1,6 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 
+import { RootState } from 'src/app/app.types';
+
+import { LoadRandomJokes } from '../../jokes.actions';
 import { Joke } from '../../jokes.types';
+import { selectRandomJokes } from '../../jokes.selectors';
 
 @Component({
   selector: 'app-jokes-list',
@@ -8,26 +14,17 @@ import { Joke } from '../../jokes.types';
   styleUrls: ['./jokes-list.component.scss']
 })
 export class JokesListComponent implements OnInit {
-  jokes: Joke[] = [];
+  randomJokes$: Observable<Joke[]>;
 
-  constructor() {}
-
-  ngOnInit() {
-    this.getJokes();
+  constructor(private store: Store<RootState>) {
+    this.randomJokes$ = store.select(selectRandomJokes);
   }
 
-  getJokes() {
-    this.jokes = [
-      {
-        id: 0,
-        joke: 'Everybody loves Raymond. Except Chuck Norris.',
-        categories: ['tv', 'raymond']
-      },
-      {
-        id: 1,
-        joke: 'Chuck Norris his keyboard has the Any key.',
-        categories: []
-      }
-    ];
+  ngOnInit() {
+    this.fetchRandomJokes();
+  }
+
+  fetchRandomJokes() {
+    this.store.dispatch(new LoadRandomJokes());
   }
 }
