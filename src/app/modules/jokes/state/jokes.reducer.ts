@@ -1,6 +1,7 @@
+import { FeatureState } from '../jokes.types';
+
 import { Actions, ActionTypes } from './jokes.actions';
 import { jokesMock } from './jokes.mocks';
-import { FeatureState } from './jokes.types';
 
 /*
  * CONSTANTS

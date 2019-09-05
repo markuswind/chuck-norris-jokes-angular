@@ -4,9 +4,9 @@ import { Observable } from 'rxjs';
 
 import { RootState } from 'src/app/app.types';
 
-import { LoadRandomJokes } from '../../jokes.actions';
 import { Joke } from '../../jokes.types';
-import { selectRandomJokes } from '../../jokes.selectors';
+import { LoadRandomJokes } from '../../state/jokes.actions';
+import { selectRandomJokes } from '../../state/jokes.selectors';
 
 @Component({
   selector: 'app-jokes-list',
