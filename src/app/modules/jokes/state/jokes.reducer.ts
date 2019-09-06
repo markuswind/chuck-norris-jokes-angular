@@ -21,6 +21,8 @@ export const initialState: FeatureState = {
   randomJokes: []
 };
 
+const MAX_NUM_OF_FAVORITES = 10;
+
 /*
  * REDUCER
  *
@@ -44,9 +46,12 @@ const reducer = createReducer(
   })),
   on(addFavoriteJoke, (state, payload) => ({
     ...state,
-    favoriteJokes: state.favoriteJokes
-      .filter(joke => joke.id !== payload.joke.id)
-      .concat([payload.joke])
+    favoriteJokes:
+      state.favoriteJokes.length >= MAX_NUM_OF_FAVORITES
+        ? state.favoriteJokes
+        : state.favoriteJokes
+            .filter(joke => joke.id !== payload.joke.id)
+            .concat([payload.joke])
   })),
   on(removeFavoriteJoke, (state, payload) => ({
     ...state,
