@@ -2,6 +2,10 @@
 
 <h3>Random Jokes</h3>
 
+<button (click)="fetchRandomJokes()">
+  Refresh
+</button>
+
 <ul>
   <li *ngFor="let joke of randomJokes$ | async">
     {{ joke.joke }}
@@ -23,7 +27,7 @@
 <h3>Favorite Jokes</h3>
 
 <button (click)="toggleRandomJokesTimer()">
-  {{ randomJokesTimer ? 'STOP TIMER' : 'START TIMER' }}
+  {{ randomJokesTimer ? 'Stop Timer' : 'Start Timer' }}
 </button>
 
 <ul>
