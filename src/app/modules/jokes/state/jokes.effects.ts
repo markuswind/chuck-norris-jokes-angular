@@ -24,9 +24,7 @@ export class JokesEffects {
     ofType(loadRandomJokes),
     switchMap(payload =>
       this.jokesService.fetchRandomJokes(payload).pipe(
-        map((response: any) =>
-          loadRandomJokesSuccess({ result: response.value })
-        ),
+        map(response => loadRandomJokesSuccess({ result: response.value })),
         catchError((error: HttpErrorResponse) =>
           of(
             loadRandomJokesError({

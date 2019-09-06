@@ -27,6 +27,15 @@ export interface LoadErrorPayload {
 }
 
 /*
+ * RESPONSES
+ */
+
+export interface JokesResponse {
+  type: string;
+  value: Joke[];
+}
+
+/*
  * STATE
  */
 

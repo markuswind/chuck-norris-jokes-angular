@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import { LoadRandomJokesPayload } from '../jokes.types';
+import { JokesResponse, LoadRandomJokesPayload } from '../jokes.types';
 
 /*
  * SERVICE
@@ -23,6 +23,6 @@ export class JokesService {
       url += `?limitTo=${payload.categories}`;
     }
 
-    return this.httpClient.get(url);
+    return this.httpClient.get<JokesResponse>(url);
   }
 }
