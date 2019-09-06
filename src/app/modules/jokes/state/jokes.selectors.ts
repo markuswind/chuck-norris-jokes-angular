@@ -5,6 +5,10 @@ import { RootState } from 'src/app/app.types';
 import { FeatureState } from '../jokes.types';
 import { jokesFeatureKey } from './jokes.reducer';
 
+/*
+ * SELECTORS
+ */
+
 export const selectFeature = createFeatureSelector<RootState, FeatureState>(
   jokesFeatureKey
 );

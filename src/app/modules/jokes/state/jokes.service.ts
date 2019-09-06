@@ -3,8 +3,13 @@ import { HttpClient } from '@angular/common/http';
 
 import { LoadRandomJokesPayload } from '../jokes.types';
 
+/*
+ * SERVICE
+ */
+
 @Injectable({
-  providedIn: 'root' // FIXME: should be provided in 'feature' instead?
+  // TODO: look into providers, since this should only be avaible in the jokes feature?
+  providedIn: 'root'
 })
 export class JokesService {
   private baseUrl = 'http://api.icndb.com/jokes';

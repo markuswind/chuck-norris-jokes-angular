@@ -8,6 +8,16 @@ import { Joke } from '../../jokes.types';
 import { loadRandomJokes } from '../../state/jokes.actions';
 import { selectRandomJokes } from '../../state/jokes.selectors';
 
+/*
+ * CONSTANTS
+ */
+
+const NUM_OF_RANDOM_JOKES = 10;
+
+/*
+ * COMPONENT
+ */
+
 @Component({
   selector: 'app-jokes-list',
   templateUrl: './jokes-list.component.html',
@@ -25,6 +35,6 @@ export class JokesListComponent implements OnInit {
   }
 
   fetchRandomJokes() {
-    this.store.dispatch(loadRandomJokes({ limit: 10 }));
+    this.store.dispatch(loadRandomJokes({ limit: NUM_OF_RANDOM_JOKES }));
   }
 }
