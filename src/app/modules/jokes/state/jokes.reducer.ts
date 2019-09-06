@@ -1,5 +1,6 @@
 import { Action, createReducer, on } from '@ngrx/store';
 
+import { MAX_NUM_OF_FAVORITES } from '../jokes.constants';
 import { FeatureState } from '../jokes.types';
 import {
   addFavoriteJoke,
@@ -20,8 +21,6 @@ export const initialState: FeatureState = {
   favoriteJokes: [],
   randomJokes: []
 };
-
-const MAX_NUM_OF_FAVORITES = 10;
 
 /*
  * REDUCER

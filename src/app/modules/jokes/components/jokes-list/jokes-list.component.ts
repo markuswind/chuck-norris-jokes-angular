@@ -4,7 +4,12 @@ import { Observable } from 'rxjs';
 
 import { RootState } from 'src/app/app.types';
 
+import {
+  MAX_NUM_OF_FAVORITES,
+  NUM_OF_RANDOM_JOKES
+} from '../../jokes.constants';
 import { Joke } from '../../jokes.types';
+
 import {
   addFavoriteJoke,
   addRandomFavoriteJoke,
@@ -15,12 +20,6 @@ import {
   selectFavoriteJokes,
   selectRandomJokes
 } from '../../state/jokes.selectors';
-
-/*
- * CONSTANTS
- */
-
-const NUM_OF_RANDOM_JOKES = 10;
 
 /*
  * COMPONENT
@@ -37,8 +36,13 @@ export class JokesListComponent implements OnInit, OnDestroy {
   randomJokesTimer: any;
 
   constructor(private store: Store<RootState>) {
-    this.favoriteJokes$ = store.select(selectFavoriteJokes);
     this.randomJokes$ = store.select(selectRandomJokes);
+
+    this.favoriteJokes$ = store.select(selectFavoriteJokes);
+    this.favoriteJokes$.subscribe(
+      jokes =>
+        jokes.length >= MAX_NUM_OF_FAVORITES && this.clearRandomJokesTimer()
+    );
   }
 
   ngOnInit() {

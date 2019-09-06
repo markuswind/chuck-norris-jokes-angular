@@ -7,7 +7,7 @@ import { localStorageSync } from 'ngrx-store-localstorage';
 import { JokesPageComponent } from './pages/jokes/jokes.page';
 import { JokesListComponent } from './components/jokes-list/jokes-list.component';
 
-import { jokesFeatureKey } from './jokes.constants';
+import { JOKES_FEATURE_KEY } from './jokes.constants';
 import { jokesReducer } from './state/jokes.reducer';
 import { JokesService } from './state/jokes.service';
 
@@ -35,7 +35,7 @@ const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
   imports: [
     BrowserModule,
     HttpClientModule,
-    StoreModule.forFeature(jokesFeatureKey, jokesReducer, { metaReducers })
+    StoreModule.forFeature(JOKES_FEATURE_KEY, jokesReducer, { metaReducers })
   ],
   providers: [JokesService],
   bootstrap: [JokesPageComponent]
