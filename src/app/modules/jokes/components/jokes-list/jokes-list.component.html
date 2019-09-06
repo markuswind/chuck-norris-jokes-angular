@@ -26,7 +26,10 @@
 
 <h3>Favorite Jokes</h3>
 
-<button (click)="toggleRandomJokesTimer()">
+<button
+  *ngIf="(favoriteJokes$ | async).length < favoriteJokesLimit"
+  (click)="toggleRandomJokesTimer()"
+>
   {{ randomJokesTimer ? 'Stop Timer' : 'Start Timer' }}
 </button>
 

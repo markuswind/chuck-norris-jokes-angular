@@ -32,16 +32,19 @@ import {
 })
 export class JokesListComponent implements OnInit, OnDestroy {
   favoriteJokes$: Observable<Joke[]>;
+  favoriteJokesLimit: number = MAX_NUM_OF_FAVORITES;
+
   randomJokes$: Observable<Joke[]>;
-  randomJokesTimer: any;
+  randomJokesTimer: NodeJS.Timer = null;
 
   constructor(private store: Store<RootState>) {
     this.randomJokes$ = store.select(selectRandomJokes);
 
     this.favoriteJokes$ = store.select(selectFavoriteJokes);
     this.favoriteJokes$.subscribe(
-      jokes =>
-        jokes.length >= MAX_NUM_OF_FAVORITES && this.clearRandomJokesTimer()
+      favoriteJokes =>
+        favoriteJokes.length >= this.favoriteJokesLimit &&
+        this.clearRandomJokesTimer()
     );
   }
 
