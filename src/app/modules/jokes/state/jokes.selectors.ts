@@ -2,8 +2,8 @@ import { createFeatureSelector, createSelector } from '@ngrx/store';
 
 import { RootState } from 'src/app/app.types';
 
+import { jokesFeatureKey } from '../jokes.constants';
 import { FeatureState } from '../jokes.types';
-import { jokesFeatureKey } from './jokes.reducer';
 
 /*
  * SELECTORS

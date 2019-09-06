@@ -5,7 +5,9 @@ import { StoreModule } from '@ngrx/store';
 
 import { JokesPageComponent } from './pages/jokes/jokes.page';
 import { JokesListComponent } from './components/jokes-list/jokes-list.component';
-import { jokesFeatureKey, jokesReducer } from './state/jokes.reducer';
+
+import { jokesFeatureKey } from './jokes.constants';
+import { jokesReducer } from './state/jokes.reducer';
 
 @NgModule({
   declarations: [JokesPageComponent, JokesListComponent],

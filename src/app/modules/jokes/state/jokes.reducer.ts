@@ -11,8 +11,6 @@ import {
  * CONSTANTS
  */
 
-export const jokesFeatureKey = 'jokes';
-
 export const initialState: FeatureState = {
   error: false,
   loading: false,
