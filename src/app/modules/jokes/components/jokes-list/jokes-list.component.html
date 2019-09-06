@@ -22,6 +22,10 @@
 
 <h3>Favorite Jokes</h3>
 
+<button (click)="toggleRandomJokesTimer()">
+  {{ randomJokesTimer ? 'STOP TIMER' : 'START TIMER' }}
+</button>
+
 <ul>
   <li *ngFor="let joke of favoriteJokes$ | async">
     {{ joke.joke }}

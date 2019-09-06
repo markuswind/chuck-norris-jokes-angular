@@ -5,6 +5,8 @@ import { of } from 'rxjs';
 import { map, catchError, switchMap } from 'rxjs/operators';
 
 import {
+  addFavoriteJoke,
+  addRandomFavoriteJoke,
   loadRandomJokes,
   loadRandomJokesError,
   loadRandomJokesSuccess
@@ -34,6 +36,16 @@ export class JokesEffects {
           )
         )
       )
+    )
+  );
+
+  @Effect()
+  addRandomFavoriteJoke$ = this.actions$.pipe(
+    ofType(addRandomFavoriteJoke),
+    switchMap(() =>
+      this.jokesService
+        .fetchRandomJokes({ limit: 1 })
+        .pipe(map(response => addFavoriteJoke({ joke: response.value[0] })))
     )
   );
 }

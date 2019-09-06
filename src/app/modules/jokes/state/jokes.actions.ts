@@ -15,6 +15,7 @@ enum ActionTypes {
   LOAD_RANDOM_JOKES = '[Jokes Feature] LOAD_RANDOM_JOKES',
   LOAD_RANDOM_JOKES_ERROR = '[Jokes Feature] LOAD_RANDOM_JOKES_ERROR',
   LOAD_RANDOM_JOKES_SUCCESS = '[Jokes Feature] LOAD_RANDOM_JOKES_SUCCESS',
+  ADD_RANDOM_FAVORITE_JOKE = '[Jokes Feature] ADD_RANDOM_FAVORITE_JOKE',
   ADD_FAVORITE_JOKE = '[Jokes Feature] ADD_FAVORITE_JOKE',
   REMOVE_FAVORITE_JOKE = '[Jokes Feature] REMOVE_FAVORITE_JOKE'
 }
@@ -38,6 +39,10 @@ export const loadRandomJokesError = createAction(
 export const loadRandomJokesSuccess = createAction(
   ActionTypes.LOAD_RANDOM_JOKES_SUCCESS,
   props<LoadRandomJokesSuccessPayload>()
+);
+
+export const addRandomFavoriteJoke = createAction(
+  ActionTypes.ADD_RANDOM_FAVORITE_JOKE
 );
 
 export const addFavoriteJoke = createAction(

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
@@ -7,6 +7,7 @@ import { RootState } from 'src/app/app.types';
 import { Joke } from '../../jokes.types';
 import {
   addFavoriteJoke,
+  addRandomFavoriteJoke,
   loadRandomJokes,
   removeFavoriteJoke
 } from '../../state/jokes.actions';
@@ -30,9 +31,10 @@ const NUM_OF_RANDOM_JOKES = 10;
   templateUrl: './jokes-list.component.html',
   styleUrls: ['./jokes-list.component.scss']
 })
-export class JokesListComponent implements OnInit {
+export class JokesListComponent implements OnInit, OnDestroy {
   favoriteJokes$: Observable<Joke[]>;
   randomJokes$: Observable<Joke[]>;
+  randomJokesTimer: any;
 
   constructor(private store: Store<RootState>) {
     this.favoriteJokes$ = store.select(selectFavoriteJokes);
@@ -43,8 +45,27 @@ export class JokesListComponent implements OnInit {
     this.fetchRandomJokes();
   }
 
+  ngOnDestroy() {
+    this.clearRandomJokesTimer();
+  }
+
   fetchRandomJokes() {
     this.store.dispatch(loadRandomJokes({ limit: NUM_OF_RANDOM_JOKES }));
+  }
+
+  toggleRandomJokesTimer() {
+    if (this.randomJokesTimer) {
+      this.clearRandomJokesTimer();
+    } else {
+      this.randomJokesTimer = setInterval(() => {
+        this.store.dispatch(addRandomFavoriteJoke());
+      }, 1000);
+    }
+  }
+
+  clearRandomJokesTimer() {
+    clearInterval(this.randomJokesTimer);
+    this.randomJokesTimer = null;
   }
 
   addFavoriteJoke(joke: Joke) {
