@@ -6,8 +6,8 @@ import { map, catchError, switchMap } from 'rxjs/operators';
 
 import {
   ActionTypes,
-  LoadRandomJokesError,
-  LoadRandomJokesSuccess
+  loadRandomJokesError,
+  loadRandomJokesSuccess
 } from './jokes.actions';
 
 /*
@@ -22,15 +22,14 @@ export class JokesEffects {
   loadRandomJokes$ = this.actions$.pipe(
     ofType(ActionTypes.LOAD_RANDOM_JOKES),
     switchMap(() =>
-      // TODO: use payload limit + create service for the API calls?
+      // TODO: use payload limit + create service for the API calls
       this.httpClient.get(`http://api.icndb.com/jokes/random/10`).pipe(
-        map(
-          (response: any) =>
-            new LoadRandomJokesSuccess({ result: response.value })
+        map((response: any) =>
+          loadRandomJokesSuccess({ result: response.value })
         ),
         catchError((error: HttpErrorResponse) => {
           return of(
-            new LoadRandomJokesError({
+            loadRandomJokesError({
               code: error.status,
               message: error.message
             })

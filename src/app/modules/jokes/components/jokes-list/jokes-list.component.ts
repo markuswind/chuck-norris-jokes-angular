@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { RootState } from 'src/app/app.types';
 
 import { Joke } from '../../jokes.types';
-import { LoadRandomJokes } from '../../state/jokes.actions';
+import { loadRandomJokes } from '../../state/jokes.actions';
 import { selectRandomJokes } from '../../state/jokes.selectors';
 
 @Component({
@@ -25,6 +25,6 @@ export class JokesListComponent implements OnInit {
   }
 
   fetchRandomJokes() {
-    this.store.dispatch(new LoadRandomJokes({ limit: 10 }));
+    this.store.dispatch(loadRandomJokes({ limit: 10 }));
   }
 }

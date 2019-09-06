@@ -1,6 +1,11 @@
-import { FeatureState } from '../jokes.types';
+import { Action, createReducer, on } from '@ngrx/store';
 
-import { Actions, ActionTypes } from './jokes.actions';
+import { FeatureState } from '../jokes.types';
+import {
+  loadRandomJokes,
+  loadRandomJokesError,
+  loadRandomJokesSuccess
+} from './jokes.actions';
 
 /*
  * CONSTANTS
@@ -18,31 +23,21 @@ export const initialState: FeatureState = {
  * REDUCER
  */
 
-export const jokesReducer = (
-  state = initialState,
-  action: Actions
-): FeatureState => {
-  switch (action.type) {
-    case ActionTypes.LOAD_RANDOM_JOKES:
-      return {
-        ...state,
-        error: false,
-        loading: true
-      };
-    case ActionTypes.LOAD_RANDOM_JOKES_SUCCESS:
-      return {
-        ...state,
-        loading: false,
-        randomJokes: action.payload.result
-      };
-    case ActionTypes.LOAD_RANDOM_JOKES_ERROR:
-      return {
-        ...state,
-        error: true,
-        loading: false,
-        randomJokes: []
-      };
-    default:
-      return state;
-  }
-};
+const reducer = createReducer(
+  initialState,
+  on(loadRandomJokes, state => ({ ...state, error: false, loading: true })),
+  on(loadRandomJokesSuccess, (state, payload) => ({
+    ...state,
+    loading: false,
+    randomJokes: payload.result
+  })),
+  on(loadRandomJokesError, state => ({
+    ...state,
+    error: false,
+    loading: false
+  }))
+);
+
+export function jokesReducer(state: FeatureState | undefined, action: Action) {
+  return reducer(state, action);
+}

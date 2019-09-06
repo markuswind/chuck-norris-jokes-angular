@@ -1,4 +1,4 @@
-import { Action } from '@ngrx/store';
+import { createAction, props } from '@ngrx/store';
 import {
   LoadRandomJokesPayload,
   LoadRandomJokesSuccessPayload,
@@ -11,22 +11,17 @@ export enum ActionTypes {
   LOAD_RANDOM_JOKES_SUCCESS = '[Jokes Feature] LOAD_RANDOM_JOKES_SUCCESS'
 }
 
-export class LoadRandomJokes implements Action {
-  readonly type = ActionTypes.LOAD_RANDOM_JOKES;
-  constructor(public payload: LoadRandomJokesPayload) {}
-}
+export const loadRandomJokes = createAction(
+  ActionTypes.LOAD_RANDOM_JOKES,
+  props<LoadRandomJokesPayload>()
+);
 
-export class LoadRandomJokesError implements Action {
-  readonly type = ActionTypes.LOAD_RANDOM_JOKES_ERROR;
-  constructor(public payload: LoadErrorPayload) {}
-}
+export const loadRandomJokesError = createAction(
+  ActionTypes.LOAD_RANDOM_JOKES_ERROR,
+  props<LoadErrorPayload>()
+);
 
-export class LoadRandomJokesSuccess implements Action {
-  readonly type = ActionTypes.LOAD_RANDOM_JOKES_SUCCESS;
-  constructor(public payload: LoadRandomJokesSuccessPayload) {}
-}
-
-export type Actions =
-  | LoadRandomJokes
-  | LoadRandomJokesError
-  | LoadRandomJokesSuccess;
+export const loadRandomJokesSuccess = createAction(
+  ActionTypes.LOAD_RANDOM_JOKES_SUCCESS,
+  props<LoadRandomJokesSuccessPayload>()
+);
