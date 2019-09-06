@@ -5,7 +5,7 @@ import {
   LoadErrorPayload
 } from '../jokes.types';
 
-export enum ActionTypes {
+enum ActionTypes {
   LOAD_RANDOM_JOKES = '[Jokes Feature] LOAD_RANDOM_JOKES',
   LOAD_RANDOM_JOKES_ERROR = '[Jokes Feature] LOAD_RANDOM_JOKES_ERROR',
   LOAD_RANDOM_JOKES_SUCCESS = '[Jokes Feature] LOAD_RANDOM_JOKES_SUCCESS'

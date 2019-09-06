@@ -1,14 +1,15 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpErrorResponse } from '@angular/common/http';
 import { Actions, ofType, Effect } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { map, catchError, switchMap } from 'rxjs/operators';
 
 import {
-  ActionTypes,
+  loadRandomJokes,
   loadRandomJokesError,
   loadRandomJokesSuccess
 } from './jokes.actions';
+import { JokesService } from './jokes.service';
 
 /*
  * EFFECTS
@@ -16,25 +17,24 @@ import {
 
 @Injectable()
 export class JokesEffects {
-  constructor(private httpClient: HttpClient, private actions$: Actions) {}
+  constructor(private actions$: Actions, private jokesService: JokesService) {}
 
   @Effect()
   loadRandomJokes$ = this.actions$.pipe(
-    ofType(ActionTypes.LOAD_RANDOM_JOKES),
-    switchMap(() =>
-      // TODO: use payload limit + create service for the API calls
-      this.httpClient.get(`http://api.icndb.com/jokes/random/10`).pipe(
+    ofType(loadRandomJokes),
+    switchMap(payload =>
+      this.jokesService.fetchRandomJokes(payload).pipe(
         map((response: any) =>
           loadRandomJokesSuccess({ result: response.value })
         ),
-        catchError((error: HttpErrorResponse) => {
-          return of(
+        catchError((error: HttpErrorResponse) =>
+          of(
             loadRandomJokesError({
               code: error.status,
               message: error.message
             })
-          );
-        })
+          )
+        )
       )
     )
   );
