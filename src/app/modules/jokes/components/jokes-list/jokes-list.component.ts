@@ -25,6 +25,6 @@ export class JokesListComponent implements OnInit {
   }
 
   fetchRandomJokes() {
-    this.store.dispatch(new LoadRandomJokes());
+    this.store.dispatch(new LoadRandomJokes({ limit: 10 }));
   }
 }
