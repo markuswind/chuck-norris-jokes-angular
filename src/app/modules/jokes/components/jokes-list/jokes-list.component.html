@@ -13,5 +13,29 @@
         </li>
       </ul>
     </div>
+
+    <button (click)="addFavoriteJoke(joke)">
+      Favorite
+    </button>
+  </li>
+</ul>
+
+<h3>Favorite Jokes</h3>
+
+<ul>
+  <li *ngFor="let joke of favoriteJokes$ | async">
+    {{ joke.joke }}
+
+    <div *ngIf="joke.categories.length > 0">
+      <ul>
+        <li *ngFor="let category of joke.categories">
+          {{ category }}
+        </li>
+      </ul>
+    </div>
+
+    <button (click)="removeFavoriteJoke(joke.id)">
+      Remove
+    </button>
   </li>
 </ul>

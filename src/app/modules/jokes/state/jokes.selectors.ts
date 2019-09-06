@@ -13,7 +13,12 @@ export const selectFeature = createFeatureSelector<RootState, FeatureState>(
   jokesFeatureKey
 );
 
+export const selectFavoriteJokes = createSelector(
+  selectFeature,
+  state => state.favoriteJokes
+);
+
 export const selectRandomJokes = createSelector(
   selectFeature,
-  (state: FeatureState) => state.randomJokes
+  state => state.randomJokes
 );
