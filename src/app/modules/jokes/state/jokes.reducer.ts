@@ -6,7 +6,8 @@ import {
   loadRandomJokes,
   loadRandomJokesError,
   loadRandomJokesSuccess,
-  removeFavoriteJoke
+  removeFavoriteJoke,
+  update
 } from './jokes.actions';
 
 /*
@@ -22,10 +23,14 @@ export const initialState: FeatureState = {
 
 /*
  * REDUCER
+ *
+ * FIXME: on update action shouldn't be needed?
+ *        see: https://github.com/btroncone/ngrx-store-localstorage/issues/65
  */
 
 const reducer = createReducer(
   initialState,
+  on(update, state => ({ ...initialState, ...state })),
   on(loadRandomJokes, state => ({ ...state, error: false, loading: true })),
   on(loadRandomJokesSuccess, (state, payload) => ({
     ...state,

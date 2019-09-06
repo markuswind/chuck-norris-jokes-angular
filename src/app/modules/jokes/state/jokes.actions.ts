@@ -1,4 +1,4 @@
-import { createAction, props } from '@ngrx/store';
+import { createAction, props, UPDATE } from '@ngrx/store';
 import {
   AddFavoriteJokePayload,
   LoadRandomJokesPayload,
@@ -22,6 +22,8 @@ enum ActionTypes {
 /*
  * ACTIONS
  */
+
+export const update = createAction(UPDATE);
 
 export const loadRandomJokes = createAction(
   ActionTypes.LOAD_RANDOM_JOKES,
