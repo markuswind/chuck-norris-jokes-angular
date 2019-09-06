@@ -2,9 +2,11 @@ import { Action, createReducer, on } from '@ngrx/store';
 
 import { FeatureState } from '../jokes.types';
 import {
+  addFavoriteJoke,
   loadRandomJokes,
   loadRandomJokesError,
-  loadRandomJokesSuccess
+  loadRandomJokesSuccess,
+  removeFavoriteJoke
 } from './jokes.actions';
 
 /*
@@ -14,6 +16,7 @@ import {
 export const initialState: FeatureState = {
   error: false,
   loading: false,
+  favoriteJokes: [],
   randomJokes: []
 };
 
@@ -33,6 +36,16 @@ const reducer = createReducer(
     ...state,
     error: false,
     loading: false
+  })),
+  on(addFavoriteJoke, (state, payload) => ({
+    ...state,
+    favoriteJokes: state.favoriteJokes
+      .filter(joke => joke.id !== payload.joke.id)
+      .concat([payload.joke])
+  })),
+  on(removeFavoriteJoke, (state, payload) => ({
+    ...state,
+    favoriteJokes: state.favoriteJokes.filter(joke => joke.id !== payload.id)
   }))
 );
 

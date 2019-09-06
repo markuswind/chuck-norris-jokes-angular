@@ -26,6 +26,14 @@ export interface LoadErrorPayload {
   message: string;
 }
 
+export interface AddFavoriteJokePayload {
+  joke: Joke;
+}
+
+export interface RemoveFavoriteJokePayload {
+  id: number;
+}
+
 /*
  * RESPONSES
  */
@@ -42,5 +50,6 @@ export interface JokesResponse {
 export interface FeatureState {
   loading: boolean;
   error: boolean;
+  favoriteJokes: Joke[];
   randomJokes: Joke[];
 }
