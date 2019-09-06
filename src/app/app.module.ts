@@ -15,7 +15,6 @@ import { JokesEffects } from './modules/jokes/state/jokes.effects';
     BrowserModule,
     AppRoutingModule,
     JokesModule,
-    // FIXME: is it possible to import effects in the jokes.module instead?
     EffectsModule.forRoot([JokesEffects]),
     StoreModule.forRoot({})
   ],

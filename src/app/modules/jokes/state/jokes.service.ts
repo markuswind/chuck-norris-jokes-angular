@@ -7,10 +7,7 @@ import { JokesResponse, LoadRandomJokesPayload } from '../jokes.types';
  * SERVICE
  */
 
-@Injectable({
-  // TODO: look into providers, since this should only be avaible in the jokes feature?
-  providedIn: 'root'
-})
+@Injectable()
 export class JokesService {
   private baseUrl = 'http://api.icndb.com/jokes';
 

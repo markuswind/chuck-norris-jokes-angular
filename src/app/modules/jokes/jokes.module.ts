@@ -8,6 +8,7 @@ import { JokesListComponent } from './components/jokes-list/jokes-list.component
 
 import { jokesFeatureKey } from './jokes.constants';
 import { jokesReducer } from './state/jokes.reducer';
+import { JokesService } from './state/jokes.service';
 
 @NgModule({
   declarations: [JokesPageComponent, JokesListComponent],
@@ -16,7 +17,7 @@ import { jokesReducer } from './state/jokes.reducer';
     HttpClientModule,
     StoreModule.forFeature(jokesFeatureKey, jokesReducer)
   ],
-  providers: [],
+  providers: [JokesService],
   bootstrap: [JokesPageComponent]
 })
 export class JokesModule {}
