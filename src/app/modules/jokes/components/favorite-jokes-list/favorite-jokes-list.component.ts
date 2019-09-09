@@ -26,7 +26,7 @@ export class FavoriteJokesListComponent implements OnDestroy {
   favoriteJokes$: Observable<Joke[]>;
   favoriteJokesLimit: number = MAX_NUM_OF_FAVORITES;
 
-  randomJokesTimer: NodeJS.Timer = null;
+  randomJokesTimer = null;
 
   constructor(private store: Store<RootState>) {
     this.favoriteJokes$ = store.select(selectFavoriteJokes);

@@ -7,20 +7,10 @@
   {{ randomJokesTimer ? 'Stop Timer' : 'Start Timer' }}
 </button>
 
-<ul>
-  <li *ngFor="let joke of favoriteJokes$ | async">
-    {{ joke.joke }}
-
-    <div *ngIf="joke.categories.length > 0">
-      <ul>
-        <li *ngFor="let category of joke.categories">
-          {{ category }}
-        </li>
-      </ul>
-    </div>
-
-    <button (click)="removeFavoriteJoke(joke.id)">
-      Remove
-    </button>
-  </li>
-</ul>
+<app-joke-detail
+  *ngFor="let joke of favoriteJokes$ | async"
+  [joke]="joke"
+  [buttonText]="'Remove Favorite'"
+  (buttonClick)="removeFavoriteJoke(joke.id)"
+>
+</app-joke-detail>
