@@ -4,8 +4,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { ActionReducer, MetaReducer, StoreModule } from '@ngrx/store';
 import { localStorageSync } from 'ngrx-store-localstorage';
 
+import { FavoriteJokesListComponent } from './components/favorite-jokes-list/favorite-jokes-list.component';
+import { RandomJokesListComponent } from './components/random-jokes-list/random-jokes-list.component';
 import { JokesPageComponent } from './pages/jokes/jokes.page';
-import { JokesListComponent } from './components/jokes-list/jokes-list.component';
 
 import { JOKES_FEATURE_KEY } from './jokes.constants';
 import { jokesReducer } from './state/jokes.reducer';
@@ -31,7 +32,11 @@ const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
  */
 
 @NgModule({
-  declarations: [JokesPageComponent, JokesListComponent],
+  declarations: [
+    JokesPageComponent,
+    FavoriteJokesListComponent,
+    RandomJokesListComponent
+  ],
   imports: [
     BrowserModule,
     HttpClientModule,

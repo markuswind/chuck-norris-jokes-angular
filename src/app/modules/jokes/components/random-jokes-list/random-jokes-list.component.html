@@ -1,0 +1,23 @@
+<h3>Random Jokes</h3>
+
+<button (click)="fetchRandomJokes()">
+  Refresh
+</button>
+
+<ul>
+  <li *ngFor="let joke of randomJokes$ | async">
+    {{ joke.joke }}
+
+    <div *ngIf="joke.categories.length > 0">
+      <ul>
+        <li *ngFor="let category of joke.categories">
+          {{ category }}
+        </li>
+      </ul>
+    </div>
+
+    <button (click)="addFavoriteJoke(joke)">
+      Favorite
+    </button>
+  </li>
+</ul>

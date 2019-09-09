@@ -1,45 +1,34 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
 import { RootState } from 'src/app/app.types';
 
-import {
-  MAX_NUM_OF_FAVORITES,
-  NUM_OF_RANDOM_JOKES
-} from '../../jokes.constants';
+import { MAX_NUM_OF_FAVORITES } from '../../jokes.constants';
 import { Joke } from '../../jokes.types';
 
 import {
-  addFavoriteJoke,
   addRandomFavoriteJoke,
-  loadRandomJokes,
   removeFavoriteJoke
 } from '../../state/jokes.actions';
-import {
-  selectFavoriteJokes,
-  selectRandomJokes
-} from '../../state/jokes.selectors';
+import { selectFavoriteJokes } from '../../state/jokes.selectors';
 
 /*
  * COMPONENT
  */
 
 @Component({
-  selector: 'app-jokes-list',
-  templateUrl: './jokes-list.component.html',
-  styleUrls: ['./jokes-list.component.scss']
+  selector: 'app-favorite-jokes-list',
+  templateUrl: './favorite-jokes-list.component.html',
+  styleUrls: ['./favorite-jokes-list.component.scss']
 })
-export class JokesListComponent implements OnInit, OnDestroy {
+export class FavoriteJokesListComponent implements OnDestroy {
   favoriteJokes$: Observable<Joke[]>;
   favoriteJokesLimit: number = MAX_NUM_OF_FAVORITES;
 
-  randomJokes$: Observable<Joke[]>;
   randomJokesTimer: NodeJS.Timer = null;
 
   constructor(private store: Store<RootState>) {
-    this.randomJokes$ = store.select(selectRandomJokes);
-
     this.favoriteJokes$ = store.select(selectFavoriteJokes);
     this.favoriteJokes$.subscribe(
       favoriteJokes =>
@@ -48,16 +37,8 @@ export class JokesListComponent implements OnInit, OnDestroy {
     );
   }
 
-  ngOnInit() {
-    this.fetchRandomJokes();
-  }
-
   ngOnDestroy() {
     this.clearRandomJokesTimer();
-  }
-
-  fetchRandomJokes() {
-    this.store.dispatch(loadRandomJokes({ limit: NUM_OF_RANDOM_JOKES }));
   }
 
   toggleRandomJokesTimer() {
@@ -73,10 +54,6 @@ export class JokesListComponent implements OnInit, OnDestroy {
   clearRandomJokesTimer() {
     clearInterval(this.randomJokesTimer);
     this.randomJokesTimer = null;
-  }
-
-  addFavoriteJoke(joke: Joke) {
-    this.store.dispatch(addFavoriteJoke({ joke }));
   }
 
   removeFavoriteJoke(id: number) {
