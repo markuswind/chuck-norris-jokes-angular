@@ -1,8 +1,8 @@
 <h3>Random Jokes</h3>
 
-<button (click)="fetchRandomJokes()">
+<app-button (buttonClick)="fetchRandomJokes()">
   Refresh
-</button>
+</app-button>
 
 <app-joke-detail
   *ngFor="let joke of randomJokes$ | async"
