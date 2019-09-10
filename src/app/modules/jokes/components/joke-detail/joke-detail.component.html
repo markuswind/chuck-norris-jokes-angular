@@ -1,15 +1,17 @@
-<app-card>
-  {{ joke.joke }}
+<div class="wrapper">
+  <app-card>
+    {{ joke.joke }}
 
-  <div *ngIf="joke.categories.length > 0">
-    <ul>
-      <li *ngFor="let category of joke.categories">
-        {{ category }}
-      </li>
-    </ul>
-  </div>
+    <div *ngIf="joke.categories.length > 0">
+      <ul>
+        <li *ngFor="let category of joke.categories">
+          {{ category }}
+        </li>
+      </ul>
+    </div>
 
-  <button (click)="buttonClick.emit()">
-    {{ buttonText }}
-  </button>
-</app-card>
+    <button (click)="buttonClick.emit()">
+      {{ buttonText }}
+    </button>
+  </app-card>
+</div>
