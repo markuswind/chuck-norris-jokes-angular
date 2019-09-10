@@ -4,6 +4,7 @@ import { Actions, ofType, Effect } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { map, catchError, switchMap } from 'rxjs/operators';
 
+import { JokesService } from '../jokes.service';
 import {
   addFavoriteJoke,
   addRandomFavoriteJoke,
@@ -11,7 +12,6 @@ import {
   loadRandomJokesError,
   loadRandomJokesSuccess
 } from './jokes.actions';
-import { JokesService } from './jokes.service';
 
 /*
  * EFFECTS

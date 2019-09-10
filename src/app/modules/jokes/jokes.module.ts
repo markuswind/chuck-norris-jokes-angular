@@ -11,8 +11,8 @@ import { RandomJokesListComponent } from './components/random-jokes-list/random-
 import { JokesPageComponent } from './pages/jokes/jokes.page';
 
 import { JOKES_FEATURE_KEY } from './jokes.constants';
+import { JokesService } from './jokes.service';
 import { jokesReducer } from './state/jokes.reducer';
-import { JokesService } from './state/jokes.service';
 import { JokeDetailComponent } from './components/joke-detail/joke-detail.component';
 
 /*

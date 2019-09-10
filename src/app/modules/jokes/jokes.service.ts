@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import { JokesResponse, LoadRandomJokesPayload } from '../jokes.types';
+import { JokesResponse, LoadRandomJokesPayload } from './jokes.types';
 
 /*
  * SERVICE
